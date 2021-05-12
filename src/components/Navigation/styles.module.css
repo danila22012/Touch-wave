@@ -5,7 +5,7 @@
   height: 100vh;
   align-items: center;
   justify-content: space-between;
-  border-right: 2px solid #90a4ae;
+  border-right: 1px solid #90a4ae;
 }
 .sidebarList {
   display: flex;
@@ -22,7 +22,7 @@
 .sidebarListItem__pressed {
   display: block;
   background: -webkit-linear-gradient(90deg, #6b4af1 0%, #cd0b84 100%);
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
