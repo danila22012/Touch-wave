@@ -1,8 +1,9 @@
 import React from 'react';
 
-const Dialogs = () =>{
+
+const Chats = () =>{
     return(
         <h1>Dialogs</h1>
     )
 }
-export default Dialogs
+export default Chats
