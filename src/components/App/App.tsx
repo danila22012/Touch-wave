@@ -3,9 +3,9 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
 import styles from "./styles.module.css";
 
-import Dialogs from "../../pages/dialogs/Dialogs";
+import Chats from "../../pages/chats/Chats";
 import Settings from "../../pages/settings/Settings";
-import User from "../../pages/user/User";
+import Contacts from "../../pages/contacts/Contacts";
 
 function App() {
   return (
@@ -13,11 +13,10 @@ function App() {
       <main className={styles.container}>
         <Navigation />
         <Switch>
-          <Route path="/dialogs" component={Dialogs} />
+          <Route path="/chats" component={Chats} />
           <Route path="/settings" component={Settings} />
-          <Route path="/user" component={Settings} />
-
-          <Redirect to="/dialogs" />
+          <Route path="/contacts" component={Contacts} />
+          <Redirect to="/chats" />
         </Switch>
       </main>
     </BrowserRouter>
