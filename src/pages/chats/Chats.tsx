@@ -8,7 +8,7 @@ const Chats = () => {
   // importing api handler
   const { getRecentChats } = UseHttpReques();
   useEffect(() => {
-    getRecentChats();
+    // getRecentChats();
   }, []);
 
   return (
