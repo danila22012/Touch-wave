@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 import Chats from "../../pages/chats/Chats";
 import Settings from "../../pages/settings/Settings";
 import Contacts from "../../pages/contacts/Contacts";
+import ChatItem from "../ChatItem/ChatItem";
 
 function App() {
   return (
@@ -13,9 +14,15 @@ function App() {
       <main className={styles.container}>
         <Navigation />
         <Switch>
-          <Route path="/chats" component={Chats} />
+          <Route path="/chats">
+            <Chats />
+            <Switch>
+              <Route path="/chats/:id" component={ChatItem}/>
+            </Switch>
+          </Route>
           <Route path="/settings" component={Settings} />
           <Route path="/contacts" component={Contacts} />
+
           <Redirect to="/chats" />
         </Switch>
       </main>
