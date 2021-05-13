@@ -30,7 +30,8 @@
   .sidebar {
     height: auto;
     padding: 0;
-    border: none;
+    border-right: none;
+    border-top: 1px solid #90a4ae;
     position: fixed;
     bottom: 0;
     width: 100vw;
@@ -38,10 +39,16 @@
   .sidebarList {
     flex-direction: row;
   }
+  .sidebarListItem{
+    padding: 15px 45px;
+  }
   .Logo {
     display: none;
   }
   .LogOut {
     display: none;
+  }
+  .mobileSearchIcon{
+    display: block;
   }
 }
