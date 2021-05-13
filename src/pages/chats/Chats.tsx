@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./styles.module.css";
 import UseHttpReques from "../../hooks/UseHttpReques.hook";
-import Search from "../../components/Search/Search";
-import axios from "axios";
+import PageTitle from "../../components/PageTitle/PageTitle";
 
 const Chats = () => {
   // importing api handler
@@ -12,10 +11,10 @@ const Chats = () => {
   }, []);
 
   return (
-    <React.Fragment>
-      <Search title={"Chats"} />
+    <div className={styles.chatsContainer}>
+      <PageTitle title={"Chats"} />
       <div className={styles.chatsContainer}></div>
-    </React.Fragment>
+    </div>
   );
 };
 export default Chats;

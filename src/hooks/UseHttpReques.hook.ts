@@ -1,4 +1,3 @@
-import React from "react";
 import axiosConfig from "../helpers/axiosConfig";
 
 const UseHttpRequest = () => {

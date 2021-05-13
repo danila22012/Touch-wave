@@ -2,18 +2,27 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 import SearchIcon from "../../static/Search.svg";
 
-type SearchProps = {
+type PageTitleProps = {
   title: string;
 };
 
-const Search = ({ title }: SearchProps) => {
+const PageTitle = ({ title }: PageTitleProps) => {
   const [isShownicon, setIsShowIcon] = useState(true);
+  const [mobileSearch, setMobileSearch] = useState(false);
   console.log(title);
 
   return (
     <React.Fragment>
       <div className={styles.pageTitleContainer}>
-        <p className={styles.pageTitle}>{title}</p>
+        <div className={styles.searchMobileToggle}>
+          <p className={styles.pageTitle}>{title}</p>
+          <img
+            className={styles.mobileSearchIcon}
+            src={SearchIcon}
+            alt="SearchLogo"
+          />
+        </div>
+
         <div className={styles.pageSearch}>
           <input
             placeholder="Search"
@@ -31,8 +40,7 @@ const Search = ({ title }: SearchProps) => {
           ) : null}
         </div>
       </div>
-      
     </React.Fragment>
   );
 };
-export default Search;
+export default PageTitle;
