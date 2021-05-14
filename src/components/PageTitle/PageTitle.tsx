@@ -7,9 +7,9 @@ type PageTitleProps = {
 };
 
 const PageTitle = ({ title }: PageTitleProps) => {
+  
   const [isShownicon, setIsShowIcon] = useState(true);
   const [mobileSearch, setMobileSearch] = useState(false);
-  console.log(title);
 
   return (
     <React.Fragment>

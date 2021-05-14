@@ -13,7 +13,6 @@ const Chats = () => {
   return (
     <div className={styles.chatsContainer}>
       <PageTitle title={"Chats"} />
-      <div className={styles.chatsContainer}></div>
     </div>
   );
 };

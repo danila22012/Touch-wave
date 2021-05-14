@@ -1,0 +1,10 @@
+.settingsContainer {
+  padding: 35px 40px;
+  width: 100%;
+}
+
+.pageTitle {
+  color: #d20980;
+  font-weight: 500;
+  font-size: 2.5em;
+}
