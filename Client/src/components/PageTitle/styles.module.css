@@ -1,50 +1,49 @@
-.pageTitleContainer{
+.pageTitleContainer {
     padding: 35px 40px;
     max-width: 431px;
     width: 100%;
 }
-.searchMobileToggle{
+.searchMobileToggle {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
 }
-.pageTitle{
-    color: #D20980;
+.pageTitle {
+    color: #d20980;
     font-weight: 500;
     font-size: 2.5em;
-   
 }
-.pageSearch{
+.pageSearch {
     position: relative;
 }
-.pageSearchField{
-    
+.pageSearchField {
     width: 100%;
     border-radius: 50px;
     outline: none;
     border: none;
-    background-color: #DCEBF2;
+    background-color: #dcebf2;
     padding: 18px 24px;
 }
-.pageSearchIcon{
+.pageSearchIcon {
     position: absolute;
     right: 20px;
     top: 15px;
     cursor: text;
 }
 
-.mobileSearchIcon{
+.mobileSearchIcon {
     display: none;
-  }
+}
 @media screen and (max-width: 420px) {
-    .pageTitleContainer{
-        padding: 20px 16px;
+    .pageTitleContainer {
+        padding: 15px 16px 0 16px;
+        border-bottom: 1px solid #90a4ae;
     }
-    .mobileSearchIcon{
+    .mobileSearchIcon {
         display: block;
-      }
-    .pageSearch{
+    }
+    .pageSearch {
         display: none;
     }
 }
