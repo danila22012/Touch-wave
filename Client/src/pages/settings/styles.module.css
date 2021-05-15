@@ -8,3 +8,8 @@
   font-weight: 500;
   font-size: 2.5em;
 }
+@media screen and (max-width: 420px) {
+  .settingsContainer{
+      padding: 15px 16px 0 16px;
+  }
+}
