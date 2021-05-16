@@ -51,7 +51,7 @@
     position: relative;
     margin-bottom: 25px;
 }
-.inputError {
+.inputError{
     position: absolute;
     color: #ff0000;
     bottom: -20px;
@@ -101,5 +101,5 @@
     .loginSwitch{
         font-size: 1.1em;
     }
-   
+    
 }
