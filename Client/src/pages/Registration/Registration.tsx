@@ -1,13 +1,18 @@
-import styles from "./styles.module.css";
+import { useEffect, useState } from "react";
+
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
+import useAuth from "../../hooks/UseAuth.hook";
+import UseLocalStorage from "../../hooks/UseLocalStorage.hook";
+
 import Logo from "../../static/Logo.svg";
 import ShowPass from "../../static/ShowPass.svg";
-import { useState } from "react";
+import styles from "./styles.module.css";
 
 type LoginProps = {
   setIsLogin: any;
+  setToken:any,
 };
 const SignupSchema = Yup.object().shape({
   number: Yup.number()
@@ -23,8 +28,11 @@ const SignupSchema = Yup.object().shape({
     .required("Required"),
 });
 
-const Registration = ({ setIsLogin }: LoginProps) => {
+const Registration = ({ setIsLogin ,setToken}: LoginProps) => {
   const [isPassShown, setIsPassShown] = useState("password");
+
+  const { signUp } = useAuth();
+  const { setToLocalStorage } = UseLocalStorage();
 
   return (
     <div className={styles.loginBg}>
@@ -38,41 +46,44 @@ const Registration = ({ setIsLogin }: LoginProps) => {
         </div>
         <Formik
           initialValues={{
-            number: "",
-            Name: "",
-            SurName: "",
+            phonenumber: "",
+            username: "",
+            secondname: "",
             login: "",
             password: "",
           }}
           // validationSchema={SignupSchema}
           onSubmit={(values) => {
-            console.log(values);
+            signUp(values).then(({data})=>{
+              setToLocalStorage(data.token)
+              setToken(true)
+            });
           }}
         >
           {({ errors, touched }) => (
             <Form className={styles.loginForm}>
               <div className={styles.inputContainer}>
                 <Field
-                  name="Name"
-                  placeholder="Name"
+                  name="username"
+                  placeholder="Username"
                   className={styles.loginFormInput}
                 />
               </div>
               <div className={styles.inputContainer}>
                 <Field
-                  name="SurName"
-                  placeholder="Surname"
+                  name="secondname"
+                  placeholder="Secondname"
                   className={styles.loginFormInput}
                 />
               </div>
 
               <div className={styles.inputContainer}>
-                {errors.number && touched.number ? (
-                  <div className={styles.inputError}>{errors.number}</div>
+                {errors.phonenumber && touched.phonenumber ? (
+                  <div className={styles.inputError}>{errors.phonenumber}</div>
                 ) : null}
                 <Field
-                  name="number"
-                  placeholder="Number"
+                  name="phonenumber"
+                  placeholder="Phonenumber"
                   className={styles.loginFormInput}
                 />
               </div>
@@ -92,8 +103,7 @@ const Registration = ({ setIsLogin }: LoginProps) => {
                 ) : null}
                 <Field
                   placeholder="password"
-                  name="Password"
-                  type={isPassShown}
+                  name="password"
                   className={styles.loginFormInput}
                 />
                 <img

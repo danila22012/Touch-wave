@@ -10,9 +10,10 @@ type loginProps = {
 const Auth = ({ setToken }: loginProps) => {
   const [isLogin, setIsLogin] = useState(true);
 
+
   return (  
     <React.Fragment>
-      {isLogin ? <Login setIsLogin={setIsLogin} /> : <Registration setIsLogin={setIsLogin}  />}
+      {isLogin ? <Login setIsLogin={setIsLogin} setToken={setToken} /> : <Registration setIsLogin={setIsLogin}  setToken={setToken}/>}
     </React.Fragment>
   );
 };

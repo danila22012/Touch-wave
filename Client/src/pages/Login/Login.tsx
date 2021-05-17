@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Formik, Form, Field } from "formik";
+
 import useAuth from "../../hooks/UseAuth.hook";
+import UseLocalStorage from "../../hooks/UseLocalStorage.hook";
 
 import Logo from "../../static/Logo.svg";
 import ShowPass from "../../static/ShowPass.svg";
 
 type LoginProps = {
   setIsLogin: any;
+  setToken: any;
 };
 
-const Login = ({ setIsLogin }: LoginProps) => {
+const Login = ({ setIsLogin, setToken }: LoginProps) => {
   const { signIn } = useAuth();
+  const { setToLocalStorage } = UseLocalStorage();
+
   const [isPassShown, setIsPassShown] = useState("password");
   return (
     <div className={styles.loginBg}>
@@ -30,7 +35,12 @@ const Login = ({ setIsLogin }: LoginProps) => {
           }}
           // validationSchema={SignupSchema}
           onSubmit={(values) => {
-            console.log(signIn(values));
+            console.log(
+              signIn(values).then(({ data }) => {
+                setToLocalStorage(data.token);
+                setToken(true)
+              })
+            );
           }}
         >
           {({ errors, touched }) => (

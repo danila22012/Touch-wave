@@ -13,12 +13,10 @@ import ChatItem from "../ChatItem/ChatItem";
 import Auth from "../../pages/auth/Auth";
 
 function App() {
-  const [token, setToken] = useState(true);
+  const [token, setToken] = useState(false);
 
   useEffect(() => {
-    if (token) {
-      //sett
-    }
+    if(localStorage.getItem('token'))setToken(true)
   });
   if (!token) {
     return <Auth setToken={setToken} />;
