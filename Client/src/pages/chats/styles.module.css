@@ -3,8 +3,25 @@
   width: 100%;
   height: 100%;
 }
-@media screen and (max-width: 420px){
-  .chatsContainer{
+.chatItemContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.chatItemImg {
+  padding-left: 15px;
+  margin-right: 20px;
+}
+.chatItemDescr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 15px;
+
+  width: 100%;
+  border-bottom: 1px solid #90a4ae;
+}
+@media screen and (max-width: 420px) {
+  .chatsContainer {
     border-right: none;
   }
 }

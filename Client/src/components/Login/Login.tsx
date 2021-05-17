@@ -58,7 +58,7 @@ const Login = ({ setIsLogin }: LoginProps) => {
                 <img
                   className={styles.inputShowPass}
                   onClick={() => {
-                    if (isPassShown == "password") setIsPassShown("text");
+                    if (isPassShown === "password") setIsPassShown("text");
                     else setIsPassShown("password");
                   }}
                   src={ShowPass}

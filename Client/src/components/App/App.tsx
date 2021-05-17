@@ -13,46 +13,48 @@ import ChatItem from "../ChatItem/ChatItem";
 import Auth from "../../pages/auth/Auth";
 
 function App() {
-  const [token, setToken] = useState(false);
+  const [token, setToken] = useState(true);
 
   useEffect(() => {
     if (token) {
       //sett
     }
   });
-  if(!token) {
-    return <Auth setToken={setToken} />
+  if (!token) {
+    return <Auth setToken={setToken} />;
   }
 
   return (
     <Provider store={store}>
       <BrowserRouter>
         <main className={styles.container}>
-          <Navigation />
-          <div className={styles.routerDesktop}>
-            <Switch>
-              <Route path="/chats">
-                <Chats />
-                <Switch>
-                  <Route path="/chats/:id" component={ChatItem} />
-                </Switch>
-              </Route>
-              <Route path="/contacts" component={Contacts} />
-              <Route path="/settings" component={Settings} />
+          
+            <Navigation />
+            <div className={styles.routerDesktop}>
+              <Switch>
+                <Route path="/chats">
+                  <Chats />
+                  <Switch>
+                    <Route path="/chats/:id" component={ChatItem} />
+                  </Switch>
+                </Route>
+                <Route path="/contacts" component={Contacts} />
+                <Route path="/settings" component={Settings} />
 
-              <Redirect to="/chats" />
-            </Switch>
-          </div>
-          <div className={styles.routerMobile}>
-            <Switch>
-              <Route path="/chats" component={Chats} exact />
-              <Route path="/chats/:id" component={ChatItem} />
-              <Route path="/contacts" component={Contacts} />
-              <Route path="/settings" component={Settings} />
+                <Redirect to="/chats" />
+              </Switch>
+            </div>
+            <div className={styles.routerMobile}>
+              <Switch>
+                <Route path="/chats" component={Chats} exact />
+                <Route path="/chats/:id" component={ChatItem} />
+                <Route path="/contacts" component={Contacts} />
+                <Route path="/settings" component={Settings} />
 
-              <Redirect to="/chats" />
-            </Switch>
-          </div>
+                <Redirect to="/chats" />
+              </Switch>
+            </div>
+         
         </main>
       </BrowserRouter>
     </Provider>
