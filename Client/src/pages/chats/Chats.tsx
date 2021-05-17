@@ -6,7 +6,7 @@ import MochAva from "../../static/MochAva.svg";
 import { NavLink } from "react-router-dom";
 
 const mochup = [
-  { id:'1', name: "olya", dataCreated:'6.42', img: MochAva, message:'rofl', isSeen:true},
+  { id:'1', name: "olya", dataCreated:'6.42', img: MochAva, message:'sasasasdsadasdasdasdasdasakjshdkasdkjsadlkhsakjsaasdasdasdasdasasdasds ', isSeen:true},
   { id:'2', name: "pitya", dataCreated:'6.221', img: MochAva, message:'lmao', isSeen:false},
   { id:'3', name: "gaga", dataCreated:'6.1', img: MochAva, message:'asd', isSeen:true},
   { id:'4', name: "wawa", dataCreated:'6.432', img: MochAva, message:'Xd', isSeen:false},
@@ -28,20 +28,20 @@ const Chats = () => {
 
       {mochup.map(el=>{
         return(
-          <NavLink to={`/chats/${el.id}`}>
-            <div className={styles.chatItemContainer}>
+          <NavLink className={styles.chatItemContainer} activeClassName={ styles.chatItemContainerSelected}  to={`/chats/${el.id}`}>
+           
               <img className={styles.chatItemImg} src={el.img} alt="profileImage"/>
               <div className={styles.chatItemDescr}>
                 <div className={styles.chatItemInfo}>
-                  <p>{el.name}</p>
-                  <p>{el.message}</p>
+                  <p className={styles.chatItemName}>{el.name}</p>
+                  <p>{el.dataCreated}</p>
                 </div>
                 <div className={styles.chatItemStatus}>
-                  <p>{el.dataCreated}</p>
+                  <p className={styles.chatItemMessage}>{el.message}</p>
                   <p>{el.isSeen}</p>
                 </div>
               </div>
-            </div>
+           
           </NavLink>
         )
       })}

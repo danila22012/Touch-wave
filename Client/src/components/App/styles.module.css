@@ -20,7 +20,7 @@ a{
     width: 100%;
 }
 .routerDesktop {
-    max-width: 431px;
+    display: flex;
     width: 100%;
 }
 @media screen and (max-width: 420px) {

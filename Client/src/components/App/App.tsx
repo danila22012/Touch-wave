@@ -31,7 +31,7 @@ function App() {
           <Navigation />
           <div className={styles.routerDesktop}>
             <Switch>
-              <Route path="/chats">
+              <Route path="/chats/">
                 <Chats />
                 <Switch>
                   <Route path="/chats/:id" component={ChatItem} />
@@ -45,7 +45,7 @@ function App() {
           </div>
           <div className={styles.routerMobile}>
             <Switch>
-              <Route path="/chats" component={Chats} exact />
+              <Route path="/chats/empty" component={Chats} exact />
               <Route path="/chats/:id" component={ChatItem} />
               <Route path="/contacts" component={Contacts} />
               <Route path="/settings" component={Settings} />

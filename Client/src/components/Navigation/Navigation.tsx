@@ -15,7 +15,7 @@ const Navigation = () => {
         <div className={styles.sidebarList}>
           <NavLink className={styles.sidebarListItem} activeClassName={styles.sidebarListItem__pressed} to="/contacts">
             <i style={{ width: 28 }} className="far fa-user fa-2x"></i></NavLink>
-          <NavLink className={styles.sidebarListItem} activeClassName={styles.sidebarListItem__pressed} to="/chats">
+          <NavLink className={styles.sidebarListItem} activeClassName={styles.sidebarListItem__pressed} to="/chats/empty">
             <i style={{ width: 28 }} className="far fa-comment fa-2x"></i></NavLink>
           <NavLink className={styles.sidebarListItem} activeClassName={styles.sidebarListItem__pressed} to="/settings">
             <i style={{ width: 28 }} className="fas fa-cog fa-2x"></i></NavLink>
