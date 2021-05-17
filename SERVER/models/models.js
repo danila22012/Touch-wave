@@ -12,16 +12,8 @@ const UserInfo = sequelize.define('user_info', {
 }, {tableName: 'user_info'})
 
 const ListOfContacts = sequelize.define('list_of_contacts', {
-    userowner: {type:DataTypes.INTEGER, references: {
-        model: UserInfo,
-        key: 'id',
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    }},
-    usercontact: {type:DataTypes.STRING, references: {
-        model: UserInfo,
-        key: 'phonenumber',
-        deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
-    }},
+    userowner: {type:DataTypes.INTEGER},
+    usercontact: {type:DataTypes.INTEGER},
 }, {tableName: 'list_of_contacts'})
  
 const ImageStorage = sequelize.define('image_storage', {
@@ -66,6 +58,11 @@ Dialog.hasOne(MessageStorage)
 MessageStorage.belongsTo(Dialog, {foreignKey: 'conversid', targetKey: 'id'})
 UserInfo.hasOne(MessageStorage)
 MessageStorage.belongsTo(UserInfo, {foreignKey: 'userid', targetKey: 'id'})
+
+UserInfo.hasOne(ListOfContacts)
+ListOfContacts.belongsTo(UserInfo, {foreignKey: 'userowner', targetKey: 'id'})
+UserInfo.hasOne(ListOfContacts)
+ListOfContacts.belongsTo(UserInfo, {foreignKey: 'usercontact', targetKey: 'id'})
 
 
 module.exports = {

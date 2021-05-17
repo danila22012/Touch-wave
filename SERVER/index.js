@@ -1,9 +1,11 @@
 require('dotenv').config()
 const express = require('express')
-const authRouter = require('./authRouter')
+// const authRouter = require('./routers/authRouter')
+// const userRouter = require('./routers/userRouter')
 const sequelize = require('./bd')
 const models = require('./models/models')
 const cors = require('cors')
+const router = require('./routers/index')
 
 
 
@@ -13,7 +15,12 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use("/auth", authRouter)
+// app.use("/auth", authRouter)
+// app.use("/user", userRouter)
+
+app.use("/api", router)
+
+
 
 const start = async () => {
     try {
