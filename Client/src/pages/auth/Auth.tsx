@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Login from "../../components/Login/Login";
-import Registration from "../../components/Registration/Registration";
+import Login from "../Login/Login";
+import Registration from "../Registration/Registration";
 
 
 type loginProps = {

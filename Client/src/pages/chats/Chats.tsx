@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React,{ useEffect } from "react";
 import styles from "./styles.module.css";
 import UseHttpReques from "../../hooks/UseHttpReques.hook";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -13,6 +13,7 @@ const mochup = [
   { id:'5', name: "yal", dataCreated:'6.2', img: MochAva, message:'asd', isSeen:true},
 ];
 
+
 const Chats = () => {
   // importing api handler
   const { getRecentChats } = UseHttpReques();
@@ -24,6 +25,7 @@ const Chats = () => {
     <div className={styles.chatsContainer}>
       <PageTitle title={"Chats"} />
       
+
       {mochup.map(el=>{
         return(
           <NavLink to={`/chats/${el.id}`}>
