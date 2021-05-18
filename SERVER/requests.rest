@@ -1,20 +1,60 @@
 
-POST http://localhost:5000/auth/registration
+POST http://localhost:5000/api/auth/registration
 Content-Type: application/json
 
 {
-    "username": "Стивен",
-    "secondname": "Джеррард",
-    "phonenumber": "+380123146547565",
-    "login": "alex4",
-    "password": "яДолбаеб"
+    "username": "Руслан",
+    "secondname": "Руслан",
+    "phonenumber": "+38012131412341",
+    "login": "ruslan",
+    "password": "ruslan"
 }
 
 ###
-POST http://localhost:5000/auth/login
+POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "login": "alex10",
-    "password": "яДолбаеб"
+    "login": "david",
+    "password": "zaebis"
 }
+
+###
+
+GET http://localhost:5000/api/user/allUsers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywicGhvbmVudW1iZXIiOiIrMzgwMTIzMTQ2NTQ3NTY1IiwiaWF0IjoxNjIxMjgwNTU2LCJleHAiOjE2MjEzNjY5NTZ9.9I5GL9J29zVT-DMGMGrIcXWOkRLCdjHgZxd5EPirYlg
+
+###
+POST http://localhost:5000/api/user/createContactList
+Content-Type: application/json
+
+{
+    "userowner": 9,
+    "usercontact": 6
+}
+
+###
+POST http://localhost:5000/api/user/addContact
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicGhvbmVudW1iZXIiOiIrMzgwMTIxMjM0MSIsImlhdCI6MTYyMTI5MTI3OCwiZXhwIjoxNjIxMzc3Njc4fQ.Ry-eGp7b8sgGfpRwkpum_W4ysLUTrXIhodE3kN_XhW4
+
+{
+    "username": "Криштиану",
+    "secondname": "Рунальду",
+    "phonenumber": "+38012314514"
+}
+
+###
+PUT http://localhost:5000/api/user/settings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwicGhvbmVudW1iZXIiOiIrMzgwMTIxMjM0MSIsImlhdCI6MTYyMTI5MTI3OCwiZXhwIjoxNjIxMzc3Njc4fQ.Ry-eGp7b8sgGfpRwkpum_W4ysLUTrXIhodE3kN_XhW4
+
+{
+    "username": "Криштиану",
+    "secondname": "Рунальду",
+    "pathtoimg": "./epta/epta.png"
+}
+
+###
+GET http://localhost:5000/api/user/user?id=5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwicGhvbmVudW1iZXIiOiIrMzgwMTIxMzE0MTIzNDEiLCJpYXQiOjE2MjEyOTI1NDIsImV4cCI6MTYyMTM3ODk0Mn0.bRnGnEOKRyhumL7gm8LgQKcD8xpx3E8vfqXIiEkFUgs

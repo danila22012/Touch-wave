@@ -1,11 +1,8 @@
-// const User = require('./models/User')
-// const {User, users} = require('./models/User')
-// const Role = require('./models/Role')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator')
-const {secret} = require("./config")
-const {UserInfo} = require('./models/models')
+const {secret} = require("../config")
+const {UserInfo, ImageStorage} = require('../models/models')
 
 
 
@@ -32,6 +29,7 @@ class authController {
             }
             const hashPassword = bcrypt.hashSync(password, 7)
             const user = await UserInfo.create({nameuser: username, secondname: secondname, phonenumber: phonenumber, userlogin: login, userpassword: hashPassword})
+            const imageStorage = await ImageStorage.create({id: user.id, pathtoimg: null})
 
             const token = generateAccessToken(user.id, user.phonenumber, user.login)
             return res.json({ token, message: "Пользователь успешно зарегистрирован"})
