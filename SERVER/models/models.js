@@ -9,6 +9,7 @@ const UserInfo = sequelize.define('user_info', {
     phonenumber: {type:DataTypes.STRING, unique: true, notNull: true},
     userlogin: {type:DataTypes.STRING, unique: true, notNull: true},
     userpassword: {type:DataTypes.STRING, unique: true, notNull: true},
+    image: {type: DataTypes.STRING, allowNull: true},
 }, {tableName: 'user_info'})
 
 const ListOfContacts = sequelize.define('list_of_contacts', {
@@ -16,15 +17,16 @@ const ListOfContacts = sequelize.define('list_of_contacts', {
     usercontact: {type:DataTypes.INTEGER},
 }, {tableName: 'list_of_contacts'})
  
-const ImageStorage = sequelize.define('image_storage', {
-    id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    pathtoimg: {type:DataTypes.STRING, notNull: true},
-}, {tableName: 'image_storage'})
+// const ImageStorage = sequelize.define('image_storage', {
+//     id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+//     image: {type:DataTypes.STRING, notNull: true},
+//     userid: {type:DataTypes.INTEGER},
+// }, {tableName: 'image_storage'})
 
-const UserProfile = sequelize.define('user_profile', {
-    userid: {type:DataTypes.INTEGER},
-    imageid: {type:DataTypes.STRING}
-}, {tableName: 'user_profile'})
+// const UserProfile = sequelize.define('user_profile', {
+//     userid: {type:DataTypes.INTEGER},
+//     imageid: {type:DataTypes.INTEGER}
+// }, {tableName: 'user_profile'})
 
 const Dialog = sequelize.define('dialog', {
     id: {type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
@@ -49,10 +51,10 @@ const MessageStorage = sequelize.define('message_storage', {
 }, {tableName: 'message_storage'})
 
 
-UserInfo.hasOne(UserProfile)
-UserProfile.belongsTo(UserInfo, {foreignKey: 'userid', targetKey: 'id'})
-UserInfo.hasOne(ImageStorage)
-ImageStorage.belongsTo(UserInfo, {foreignKey: 'imageid', targetKey: 'id'})
+// UserInfo.hasOne(UserProfile)
+// UserProfile.belongsTo(UserInfo, {foreignKey: 'userid', targetKey: 'id'})
+// UserInfo.hasOne(ImageStorage)
+// ImageStorage.belongsTo(UserInfo, {foreignKey: 'imageid', targetKey: 'id'})
 
 Dialog.hasOne(MessageStorage)
 MessageStorage.belongsTo(Dialog, {foreignKey: 'conversid', targetKey: 'id'})
@@ -64,12 +66,16 @@ ListOfContacts.belongsTo(UserInfo, {foreignKey: 'userowner', targetKey: 'id'})
 UserInfo.hasOne(ListOfContacts)
 ListOfContacts.belongsTo(UserInfo, {foreignKey: 'usercontact', targetKey: 'id'})
 
+Dialog.hasOne(MessageStorage)
+MessageStorage.belongsTo(Dialog, {foreignKey: 'conversid', targetKey: 'id'})
+
+UserInfo.hasOne(MessageStorage)
+MessageStorage.belongsTo(UserInfo, {foreignKey: 'userid', targetKey: 'id'})
+
 
 module.exports = {
     UserInfo,
     ListOfContacts,
-    ImageStorage,
-    UserProfile,
     Dialog,
     MessageStorage,
 }

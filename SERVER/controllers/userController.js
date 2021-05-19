@@ -1,5 +1,7 @@
-const {UserInfo, ImageStorage, ListOfContacts, Dialog, MessageStorage} = require('../models/models')
+const {UserInfo, ListOfContacts, Dialog, MessageStorage} = require('../models/models')
 const { Op } = require("sequelize");
+const uuid = require('uuid')
+const path = require('path')
 
 class userController {
     async getAllUsers(req, res) {
@@ -25,7 +27,6 @@ class userController {
 
     async getUser(req, res) {
         try {
-            //тоже не нужный метод
             const {id: usercontact} = req.query
             const {id: userowner} = req.user
             const list = await ListOfContacts.findOne({where: {userowner, usercontact}})
@@ -34,8 +35,8 @@ class userController {
             }
 
             const user = await UserInfo.findOne({where: {id: usercontact}})
-            const {nameuser, secondname, phonenumber} = user
-            return res.json({nameuser, secondname, phonenumber});
+            const {nameuser, secondname, phonenumber, image} = user
+            return res.json({nameuser, secondname, phonenumber, image});
         } catch (e) {
             console.log(e)
         }
@@ -44,7 +45,6 @@ class userController {
     // это для теста чтобы доавлять произвольно contact_list 
     async createContactList(req, res) {
         try {
-            // хз для чего этод метож, мы моем толкьо добавлять юзера, а не создавать
             const {userowner, usercontact} = req.body
             const candidate = await ListOfContacts.findOne({where: {userowner, usercontact}})
             if (candidate) {
@@ -59,7 +59,6 @@ class userController {
 
     async getContact(req, res) {
         try {
-            //ненужный метож кста
             const {id: usercontact} = req.query
             const {id: userowner} = req.user
             const list = await ListOfContacts.findOne({where: {userowner, usercontact}})
@@ -68,8 +67,8 @@ class userController {
             }
 
             const user = await UserInfo.findOne({where: {id: usercontact}})
-            const {nameuser, secondname} = user
-            return res.json({nameuser, secondname});
+            const {nameuser, secondname, image} = user
+            return res.json({nameuser, secondname, image})
         } catch (e) {
             console.log(e)
         }
@@ -79,7 +78,6 @@ class userController {
     async addContact(req, res) {
         try {
             const {id} = req.user
-            //спросить а нахуя нам сообствнно передавать имя, если по номеру можно подтянуть имя с бд
             const {username, secondname, phonenumber} = req.body
             const candidate = await UserInfo.findOne({where: {phonenumber}})
             if (!candidate) {
@@ -88,11 +86,11 @@ class userController {
             
             const candidateList = await ListOfContacts.findOne({where: {userowner: id, usercontact: candidate.id}})
             if (candidateList) {
-                return res.status(400).json({message: `${username} ${secondname} уже есть в контактах`})
+                return res.status(400).json({message: `${phonenumber} уже есть в контактах`})
             }
             const contact = await ListOfContacts.create({userowner: id, usercontact: candidate.id})
             const dialog = await createDialog(id, candidate.id)
-            return res.json({message: `${username} ${secondname} добавлен в контакты`, dialogId: dialog.id})
+            return res.json({message: `${phonenumber} добавлен в контакты`, dialogId: dialog.id, image: candidate.image, username: candidate.nameuser, secondname: candidate.secondname})
         } catch(e) {
             console.log(e)
         }
@@ -101,11 +99,11 @@ class userController {
     async getAllContacts(req, res) {
         try {
             const {id} = req.user
-            //работает чётко
+            
             const list = await ListOfContacts.findAll({where: {userowner: id}})
             const userIds = list.map(({usercontact}) => usercontact)
             if (list.length === 0) {
-                return res.json([])
+                return res.json({message: "Error", data: []})
             }
             let users = await UserInfo.findAll({where: {
                 id: userIds
@@ -128,6 +126,7 @@ class userController {
               newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
                 newUsers[index].id = user.id
+                newUsers[index].image = user.image
                 if (index === users.length - 1)
                 res.json(newUsers)
 
@@ -140,8 +139,7 @@ class userController {
     async deleteContact(req, res) {
         try {
             const {id} = req.user
-            // нахуя передавать всю инфу если можно передать только айди юзера?
-            const {phonenumber, username, secondname, id : contactId} = req.body
+            const {id : contactId} = req.body
             let condition = [
                 { [Op.and]: [
                     { userowner: id },
@@ -184,11 +182,11 @@ class userController {
     async getAllDialogs(req, res) {
         try {
             const {id} = req.user
-            //добавить последнее сообщение в ответ
+            
             const list = await ListOfContacts.findAll({where: {userowner: id}})
             const userIds = list.map(({usercontact}) => usercontact)
             if (list.length === 0) {
-                return res.json([])
+                return res.json({message: "Error", data: []})
             }
             let users = await UserInfo.findAll({where: {
                 id: userIds
@@ -219,6 +217,7 @@ class userController {
                 
                 newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
+                newUsers[index].image = user.image
                 if (index === users.length - 1)
                 res.json(newUsers)
             })
@@ -242,24 +241,21 @@ class userController {
     // попробуй тестонуть. Мое расширние в vscode походу не умеет отправлять put. Загляни в requests.rest. Там примерная структура запросов
     async updateSettings(req, res) {
         try {
-
-        //решить вопрос с картинками нахуй
             const {id} = req.user
-            const {username, secondname, pathtoimg} = req.body
+            const {username, secondname} = req.body
+            const {image} = req.files
             const result = await UserInfo.update({username, secondname}, {where: {id}})
             if (!result) {
-                return res.status(400).json({message: "Ошибка"})
+                return res.status(400).json({message: `Ошибка username = ${username} and secondname = ${secondname}`})
             }
-            if (pathtoimg) {
-                const imageRes = await ImageStorage.update({pathtoimg}, {where: {id}})
-                if (!imageRes) {
-                    return res.status(400).json({message: "Ошибка"})
-                }
-            }
-            
-            return res.json({message: `Контакт обновлен`})
-        } catch(e) {
+            let fileName = uuid.v4() + '.jpg'
+            image.mv(path.resolve(__dirname, '..', 'static', fileName))
 
+            const user = await UserInfo.update({image: fileName}, {where: {id}})
+            
+            return res.json({message: `Контакт обновлен`, image: fileName})
+        } catch(e) {
+            console.log(e)
         }
     }
 
@@ -276,7 +272,6 @@ class userController {
 }
 
 async function findDialog(userFirst, userSecond) {
-   
     const firstCandidate = await Dialog.findOne({where: {userfirst: userFirst, usersecond: userSecond}})
     if (firstCandidate) {
         return {userfirst: firstCandidate.userfirst, usersecond: firstCandidate.usersecond}
