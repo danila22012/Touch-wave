@@ -213,8 +213,11 @@ class userController {
                     userid: user.id,
                 }, order: [['updatedAt', 'DESC']]})
                 
-                newUsers[index].lastMessage = messageCandidates?.[0]?.usermessage
-                newUsers[index].sentDate = messageCandidates?.[0]?.createdAt
+                if (messageCandidates.length > 0) {
+                    newUsers[index].lastMessage = messageCandidates[0]?.usermessage
+                    newUsers[index].sentDate = messageCandidates[0]?.createdAt
+                }
+               
                 
                 newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
