@@ -36,7 +36,7 @@ class userController {
 
             const user = await UserInfo.findOne({where: {id: usercontact}})
             const {nameuser, secondname, phonenumber, image} = user
-            return res.json({nameuser, secondname, phonenumber, image});
+            return res.json({nameuser, secondname, phonenumber, image: implementImage(image)});
         } catch (e) {
             console.log(e)
         }
@@ -68,7 +68,7 @@ class userController {
 
             const user = await UserInfo.findOne({where: {id: usercontact}})
             const {nameuser, secondname, image} = user
-            return res.json({nameuser, secondname, image})
+            return res.json({nameuser, secondname, image: implementImage(image)})
         } catch (e) {
             console.log(e)
         }
@@ -90,7 +90,7 @@ class userController {
             }
             const contact = await ListOfContacts.create({userowner: id, usercontact: candidate.id})
             const dialog = await createDialog(id, candidate.id)
-            return res.json({message: `${phonenumber} добавлен в контакты`, dialogId: dialog.id, image: candidate.image, username: candidate.nameuser, secondname: candidate.secondname})
+            return res.json({message: `${phonenumber} добавлен в контакты`, dialogId: dialog.id, image: implementImage(candidate.image), username: candidate.nameuser, secondname: candidate.secondname})
         } catch(e) {
             console.log(e)
         }
@@ -126,7 +126,7 @@ class userController {
               newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
                 newUsers[index].id = user.id
-                newUsers[index].image = user.image
+                newUsers[index].image = implementImage(user.image)
                 if (index === users.length - 1)
                 res.json(newUsers)
 
@@ -221,7 +221,7 @@ class userController {
                 
                 newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
-                newUsers[index].image = user.image
+                newUsers[index].image = implementImage(user.image)
                 if (index === users.length - 1)
                 res.json(newUsers)
             })
@@ -257,7 +257,7 @@ class userController {
 
             const user = await UserInfo.update({image: fileName}, {where: {id}})
             
-            return res.json({message: `Контакт обновлен`, image: fileName})
+            return res.json({message: `Контакт обновлен`, image: implementImage(fileName)})
         } catch(e) {
             console.log(e)
         }
@@ -297,6 +297,10 @@ async function createDialog(userFirst, userSecond) {
     }
     const dialog = await Dialog.create({userfirst: userFirst, usersecond: userSecond})
     return dialog
+}
+
+function implementImage(name) {
+    return `http://localhost:${process.env.PORT}/${name}`;
 }
 
 async function deleteMessagesDialog() {
