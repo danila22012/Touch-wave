@@ -34,7 +34,7 @@ const Chats = () => {
               <div className={styles.chatItemDescr}>
                 <div className={styles.chatItemInfo}>
                   <p className={styles.chatItemName}>{el.name}</p>
-                  <p>{el.dataCreated}</p>
+                  <p style={{fontSize:"0.8em"}}>{el.dataCreated}</p>
                 </div>
                 <div className={styles.chatItemStatus}>
                   <p className={styles.chatItemMessage}>{el.message}</p>

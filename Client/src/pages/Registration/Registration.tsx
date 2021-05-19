@@ -104,6 +104,7 @@ const Registration = ({ setIsLogin ,setToken}: LoginProps) => {
                 <Field
                   placeholder="password"
                   name="password"
+                  type={isPassShown}
                   className={styles.loginFormInput}
                 />
                 <img
