@@ -15,8 +15,8 @@ POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
 {
-    "login": "david",
-    "password": "zaebis"
+    "login": "ruslan",
+    "password": "ruslan"
 }
 
 ###
@@ -29,8 +29,20 @@ POST http://localhost:5000/api/user/createContactList
 Content-Type: application/json
 
 {
-    "userowner": 9,
-    "usercontact": 6
+    "userowner": 7,
+    "usercontact": 9
+}
+
+###
+POST http://localhost:5000/api/user/createMessage
+Content-Type: application/json
+
+{
+    "conversid": 3,
+    "userid": 6,
+    "usermessage": "Second",
+    "dataofsend": null,
+    "isseen": null
 }
 
 ###
