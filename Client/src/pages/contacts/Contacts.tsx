@@ -7,6 +7,7 @@ import MochAva from "../../static/MochAva.svg";
 import { NavLink } from "react-router-dom";
 
 const Contacts = (props: any) => {
+  console.log(props);
   return (
     //add contact
     <div className={styles.contactsContainer}>
@@ -17,8 +18,10 @@ const Contacts = (props: any) => {
             <NavLink to={`/chats/${el.dialogId}`} className={styles.contactsListItem}>
               <img
                 className={styles.contactsListItemImg}
-                src={MochAva}
+                src={el.image}
                 alt="ava"
+                width="60"
+                height="60"
               />
               <p className={styles.contactsListItemName}>{el.nameuser}</p>
               <p className={styles.contactsListItemName}>{el.secondname}</p>
@@ -29,7 +32,9 @@ const Contacts = (props: any) => {
     </div>
   );
 };
-const mapStateToProps = (state: any) => state;
+const mapStateToProps = (state: any) =>({
+  contacts:state.contactsReducer.contacts
+}) 
 const MapDispatchToProps = (dispatch: any) => ({
   getContacts: dispatch(getAllContacts()),
 });

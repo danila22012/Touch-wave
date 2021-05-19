@@ -20,6 +20,9 @@
   font-size: 1.1em;
   letter-spacing: 0.5px;
 }
+.contactsListItemImg{
+  clip-path: circle(50% at 50% 50%);
+}
 @media screen and (max-width: 420px) {
   .contactsContainer {
     border: none;
