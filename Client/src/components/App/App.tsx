@@ -43,7 +43,7 @@ function App() {
           </div>
           <div className={styles.routerMobile}>
             <Switch>
-              <Route path="/chats/empty" component={Chats} exact />
+              <Route path="/chats/0" component={Chats} exact />
               <Route path="/chats/:id" component={ChatItem} />
               <Route path="/contacts" component={Contacts} />
               <Route path="/settings" component={Settings} />

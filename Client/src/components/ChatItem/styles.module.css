@@ -1,0 +1,15 @@
+.ChatItemContainer{
+    width: 100%;
+}
+.ChatItemEmpty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.ChatItemEmptyTitle{
+    background-color:  #DCEBF2;
+    display: block;
+    padding: 5px;
+    border-radius: 10px;
+}

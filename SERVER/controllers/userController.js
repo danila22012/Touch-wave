@@ -25,6 +25,7 @@ class userController {
 
     async getUser(req, res) {
         try {
+            //тоже не нужный метод
             const {id: usercontact} = req.query
             const {id: userowner} = req.user
             const list = await ListOfContacts.findOne({where: {userowner, usercontact}})
@@ -43,6 +44,7 @@ class userController {
     // это для теста чтобы доавлять произвольно contact_list 
     async createContactList(req, res) {
         try {
+            // хз для чего этод метож, мы моем толкьо добавлять юзера, а не создавать
             const {userowner, usercontact} = req.body
             const candidate = await ListOfContacts.findOne({where: {userowner, usercontact}})
             if (candidate) {
@@ -57,6 +59,7 @@ class userController {
 
     async getContact(req, res) {
         try {
+            //ненужный метож кста
             const {id: usercontact} = req.query
             const {id: userowner} = req.user
             const list = await ListOfContacts.findOne({where: {userowner, usercontact}})
@@ -76,6 +79,7 @@ class userController {
     async addContact(req, res) {
         try {
             const {id} = req.user
+            //спросить а нахуя нам сообствнно передавать имя, если по номеру можно подтянуть имя с бд
             const {username, secondname, phonenumber} = req.body
             const candidate = await UserInfo.findOne({where: {phonenumber}})
             if (!candidate) {
@@ -97,7 +101,7 @@ class userController {
     async getAllContacts(req, res) {
         try {
             const {id} = req.user
-            
+            //работает чётко
             const list = await ListOfContacts.findAll({where: {userowner: id}})
             const userIds = list.map(({usercontact}) => usercontact)
             if (list.length === 0) {
@@ -136,6 +140,7 @@ class userController {
     async deleteContact(req, res) {
         try {
             const {id} = req.user
+            // нахуя передавать всю инфу если можно передать только айди юзера?
             const {phonenumber, username, secondname, id : contactId} = req.body
             let condition = [
                 { [Op.and]: [
@@ -179,7 +184,7 @@ class userController {
     async getAllDialogs(req, res) {
         try {
             const {id} = req.user
-            
+            //добавить последнее сообщение в ответ
             const list = await ListOfContacts.findAll({where: {userowner: id}})
             const userIds = list.map(({usercontact}) => usercontact)
             if (list.length === 0) {
@@ -237,6 +242,8 @@ class userController {
     // попробуй тестонуть. Мое расширние в vscode походу не умеет отправлять put. Загляни в requests.rest. Там примерная структура запросов
     async updateSettings(req, res) {
         try {
+
+        //решить вопрос с картинками нахуй
             const {id} = req.user
             const {username, secondname, pathtoimg} = req.body
             const result = await UserInfo.update({username, secondname}, {where: {id}})
@@ -269,6 +276,7 @@ class userController {
 }
 
 async function findDialog(userFirst, userSecond) {
+   
     const firstCandidate = await Dialog.findOne({where: {userfirst: userFirst, usersecond: userSecond}})
     if (firstCandidate) {
         return {userfirst: firstCandidate.userfirst, usersecond: firstCandidate.usersecond}

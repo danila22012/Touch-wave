@@ -28,7 +28,8 @@ const Chats = () => {
 
       {mochup.map(el=>{
         return(
-          <NavLink className={styles.chatItemContainer} activeClassName={ styles.chatItemContainerSelected}  to={`/chats/${el.id}`}>
+          //pass user id into query
+          <NavLink className={styles.chatItemContainer} activeClassName={ styles.chatItemContainerSelected}  to={`/chats/${el.id}?contactId=${el.id}`}>
            
               <img className={styles.chatItemImg} src={el.img} alt="profileImage"/>
               <div className={styles.chatItemDescr}>

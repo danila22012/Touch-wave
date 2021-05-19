@@ -1,0 +1,55 @@
+.ContactProfileContainer {
+  padding: 20px 40px 15px 40px;
+  border: 1px solid #dcebf2;
+  display: flex;
+  justify-content: space-between;
+}
+.ContactProfileUser {
+  display: flex;
+  align-items: center;
+}
+.ContactProfileBtns {
+  display: flex;
+  align-items: center;
+}
+.ContactProfileUserName {
+  margin-left: 15px;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+.ContactProfileBtnsEdit,
+.ContactProfileBtnsClean {
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 30px;
+}
+.ProfileContextMenu {
+  padding: 15px 20px;
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  background-color: #fff;
+  top: 50px;
+  border: 1px solid #000;
+  border-radius: 25px;
+  right: 0;
+}
+.mobileDotsMenu {
+  position: relative;
+  display: none;
+  align-items: center;
+}
+@media screen and (max-width: 420px) {
+  .ContactProfileBtnsEdit,
+  .ContactProfileBtnsClean {
+    display: none;
+  }
+  .ContactProfileContainer {
+    padding: 10px 20px;
+  }
+  .mobileDotsMenu {
+    display: flex;
+  }
+}
