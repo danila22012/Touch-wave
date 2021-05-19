@@ -103,7 +103,7 @@ class userController {
             const list = await ListOfContacts.findAll({where: {userowner: id}})
             const userIds = list.map(({usercontact}) => usercontact)
             if (list.length === 0) {
-                return res.json({message: "Error", data: []})
+                return res.json([])
             }
             let users = await UserInfo.findAll({where: {
                 id: userIds
@@ -186,7 +186,7 @@ class userController {
             const list = await ListOfContacts.findAll({where: {userowner: id}})
             const userIds = list.map(({usercontact}) => usercontact)
             if (list.length === 0) {
-                return res.json({message: "Error", data: []})
+                return res.json([])
             }
             let users = await UserInfo.findAll({where: {
                 id: userIds
@@ -213,7 +213,8 @@ class userController {
                     userid: user.id,
                 }, order: [['updatedAt', 'DESC']]})
                 
-                newUsers[index].lastMessage = messageCandidates[0]?.usermessage
+                newUsers[index].lastMessage = messageCandidates?.[0]?.usermessage
+                newUsers[index].sentDate = messageCandidates?.[0]?.createdAt
                 
                 newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
