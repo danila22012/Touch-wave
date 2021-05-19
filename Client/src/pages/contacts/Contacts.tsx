@@ -1,21 +1,36 @@
-import React, { useEffect } from "react";
 import styles from "./styles.module.css";
-import UseHttpReques from "../../hooks/UseHttpReques.hook";
+import { connect } from "react-redux";
+
 import PageTitle from "../../components/PageTitle/PageTitle";
-import axiosConfig from "../../helpers/axiosConfig";
+import { getAllContacts } from "../../actions/";
+import MochAva from "../../static/MochAva.svg";
+import { NavLink } from "react-router-dom";
 
-const Contacts = () => {
-  useEffect(() => {
-    axiosConfig.get('/user/allUsers')
-    console.log('opened asd');
-    
-  });
-
+const Contacts = (props: any) => {
   return (
-    //add contact 
+    //add contact
     <div className={styles.contactsContainer}>
       <PageTitle title={"Contacts"} />
+      <div className={styles.contactsList}>
+        {props.contacts.map((el:any) => {
+          return (
+            <NavLink to={`/chats/${el.dialogId}`} className={styles.contactsListItem}>
+              <img
+                className={styles.contactsListItemImg}
+                src={MochAva}
+                alt="ava"
+              />
+              <p className={styles.contactsListItemName}>{el.nameuser}</p>
+              <p className={styles.contactsListItemName}>{el.secondname}</p>
+            </NavLink>
+          );
+        })}
+      </div>
     </div>
   );
 };
-export default Contacts;
+const mapStateToProps = (state: any) => state;
+const MapDispatchToProps = (dispatch: any) => ({
+  getContacts: dispatch(getAllContacts()),
+});
+export default connect(mapStateToProps, MapDispatchToProps)(Contacts);

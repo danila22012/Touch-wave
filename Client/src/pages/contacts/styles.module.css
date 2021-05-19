@@ -1,7 +1,24 @@
 .contactsContainer {
   border-right: 1px solid #90a4ae;
+  max-width: 431px;
   height: 100%;
   width: 100%;
+}
+.contactsList{
+  padding:0 36px ;
+}
+.contactsListItem{
+  display: flex;
+  align-items: center;
+}
+.contactsListItemImg{
+  margin-right: 20px;
+}
+.contactsListItemName{
+  font-weight: 500;
+  margin-right: 5px;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
 }
 @media screen and (max-width: 420px) {
   .contactsContainer {

@@ -1,8 +1,11 @@
 import axios from "axios";
 
-const instance = axios.create({
-    baseURL: process.env.REACT_APP_BASE_URL
+const axiosConfig = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
 });
-instance.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+axiosConfig.defaults.headers.common["Authorization"] =
+  localStorage.getItem("token");
 
-export default instance;
+axiosConfig.defaults.headers.post["Content-Type"] =
+  "application/x-www-form-urlencoded";
+export default axiosConfig;

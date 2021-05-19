@@ -1,10 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux";
+import { contactsReducer } from "./reducers/contactsReducer";
 
-
-const initialState: object = {
-    name:'vasa',
-    age:25
-};
-export const rootReducer = (state=initialState, action:object) => {
-    return state
-};
+export const rootReducer = contactsReducer;
