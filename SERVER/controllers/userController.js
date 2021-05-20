@@ -42,6 +42,17 @@ class userController {
         }
     }
 
+    async getMyUser(req, res) {
+        try {
+            const {id} = req.user
+            const user = await UserInfo.findOne({where: {id}})
+            const {nameuser, secondname, image} = user
+            return res.json({nameuser, secondname, phonenumber, image: implementImage(image)});
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     // это для теста чтобы доавлять произвольно contact_list 
     async createContactList(req, res) {
         try {
@@ -90,7 +101,7 @@ class userController {
             }
             const contact = await ListOfContacts.create({userowner: id, usercontact: candidate.id})
             const dialog = await createDialog(id, candidate.id)
-            return res.json({message: `${phonenumber} добавлен в контакты`, dialogId: dialog.id, image: implementImage(candidate.image), username: candidate.nameuser, secondname: candidate.secondname})
+            return res.json({dialogId: dialog.id, image: implementImage(candidate.image), nameuser: candidate.nameuser, secondname: candidate.secondname, id: candidate.id})
         } catch(e) {
             console.log(e)
         }

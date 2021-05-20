@@ -22,10 +22,16 @@ class authController {
                 return res.status(400).json({message: "Ошибка при регистрации", errors})
             }
             const {username, secondname, phonenumber, login, password} = req.body
-            // const candidate = await UserInfo.findOne({phonenumber})
-            const candidate = await UserInfo.findOne({where: {phonenumber}})
-            if (candidate) {
+            if (!(/\+\d{12}/.test(phonenumber))) {
+                return res.status(400).json({message: "Неккоректный номер", errors})
+            }
+            const candidatePhone = await UserInfo.findOne({where: {phonenumber}})
+            if (candidatePhone) {
                 return res.status(400).json({message: "Пользователь с таким телефоном уже существует"})
+            }
+            const candidateLogin = await UserInfo.findOne({where: {login}})
+            if (candidateLogin) {
+                return res.status(400).json({message: "Пользователь с таким логином уже существует"})
             }
             const hashPassword = bcrypt.hashSync(password, 7)
             const user = await UserInfo.create({nameuser: username, secondname: secondname, phonenumber: phonenumber, userlogin: login, userpassword: hashPassword, image: 'default.jpg'})
