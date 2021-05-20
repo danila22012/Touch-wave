@@ -41,7 +41,7 @@ const onConnection = (socket) => {
   
     socket.join(roomId)
   
-    // registerMessageHandlers(io, socket)
+    registerMessageHandlers(io, socket)
     // registerUserHandlers(io, socket)
   
     socket.on('disconnect', () => {

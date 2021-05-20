@@ -3,13 +3,13 @@ const {UserInfo, Dialog, MessageStorage} = require('../models/models')
 const { Op } = require("sequelize")
 
 module.exports = (io, socket) => {
-    const getMessages = () => {
+    const getMessages = async () => {
     //   const messages = db.get('messages').value()
-  
+      const messages = await MessageStorage.findAll({where: {conversid: socket.roomId}})
       io.in(socket.roomId).emit('messages', messages)
     }
   
-    const addMessage = (message) => {
+    const addMessage = async (conversid, userid, message) => {
     //   db.get('messages')
     //     .push({
     //       messageId: nanoid(8),
@@ -17,13 +17,13 @@ module.exports = (io, socket) => {
     //       ...message
     //     })
     //     .write()
-  
+    await MessageStorage.create({conversid, userid, usermessage: message}, {where: {conversid}})
       getMessages()
     }
   
-    const removeMessage = (messageId) => {
+    const removeMessage = async (messageId) => {
     //   db.get('messages').remove({ messageId }).write()
-  
+      const candidate = await MessageStorage.destroy({where: {id: messageId}})
       getMessages()
     }
   
