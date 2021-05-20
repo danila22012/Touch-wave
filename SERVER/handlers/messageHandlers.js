@@ -3,7 +3,7 @@ const {UserInfo, Dialog, MessageStorage} = require('../models/models')
 module.exports = (io, socket) => {
     const getMessages = async (roomId) => {
       const messages = await MessageStorage.findAll({where: {conversid: roomId}})
-      io.in(roomId).emit('messages', messages)
+      io.sockets.to(roomId).emit('messages', messages)
     }
   
     const addMessage = async (conversid, userid, message) => {
