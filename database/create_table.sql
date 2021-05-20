@@ -5,21 +5,12 @@ CREATE TABLE user_info (
     PhoneNumber     VARCHAR(15)     CONSTRAINT un_nn_PhoneNumber_user_info      UNIQUE NOT NULL,
     UserLogin       VARCHAR(50)     CONSTRAINT nn_UserLogin_user_info           NOT NULL,
     UserPassword    VARCHAR(100)    CONSTRAINT nn_UserPassword_user_info        NOT NULL
+    PathToImg       VARCHAR(100)    CONSTRAINT nn_PathToImg_image_storage       NOT NULL
 );
 
 CREATE TABLE list_of_contacts (
     UserOwner       SERIAL          CONSTRAINT fk_user_info                     REFERENCES user_info,
     UserContact     SERIAL          CONSTRAINT fk_user_info_as_contact          REFERENCES user_info      
-);
-
-CREATE TABLE image_storage (
-    Id              SERIAL          CONSTRAINT pk_image_storage                 PRIMARY KEY,
-    PathToImg       VARCHAR(100)    CONSTRAINT nn_PathToImg_image_storage       NOT NULL
-);
-
-CREATE TABLE user_profile (
-    UserId          SERIAL          CONSTRAINT fk_user_info                     REFERENCES user_info,
-    ImageId         SERIAL          CONSTRAINT fk_image_storage                 REFERENCES image_storage
 );
 
 --For first version will be used more easy version: all messages will be in same place
