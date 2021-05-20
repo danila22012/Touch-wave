@@ -30,6 +30,7 @@ CREATE TABLE dialog (
 ); 
 
 CREATE TABLE message_storage (
+    Id              SERIAL          CONSTRAINT pk_message_storage               PRIMARY KEY,
     ConversId       SERIAL          CONSTRAINT fk_dialog                        REFERENCES dialog,
     UserId          SERIAL          CONSTRAINT fk_user_info                     REFERENCES user_info,
     UserMessage     VARCHAR(1000)   CONSTRAINT nn_UserMessage_message_storage   NOT NULL,

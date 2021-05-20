@@ -26,12 +26,12 @@ INSERT INTO dialog
 
 --message_storage--
 INSERT INTO message_storage     
-    VALUES ('1', '1', 'Hello world!', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
+    VALUES (DEFAULT, '1', '1', 'Hello world!', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
 INSERT INTO message_storage     
-    VALUES ('1', '2', 'Hello you, Yehor!', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
+    VALUES (DEFAULT, '1', '2', 'Hello you, Yehor!', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
 INSERT INTO message_storage     
-    VALUES ('1', '2', 'How are you, Yehor?', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
+    VALUES (DEFAULT, '1', '2', 'How are you, Yehor?', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
 INSERT INTO message_storage     
-    VALUES ('1', '1', 'Nice. Now I need to leave. Bye!', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
+    VALUES (DEFAULT, '1', '1', 'Nice. Now I need to leave. Bye!', 'Wed Dec 17 07:37:16 1997 PST', TRUE);
 INSERT INTO message_storage     
-    VALUES ('1', '2', 'Bye!', 'Wed Dec 17 07:37:16 1997 PST', FALSE);
+    VALUES (DEFAULT, '1', '2', 'Bye!', 'Wed Dec 17 07:37:16 1997 PST', FALSE);

@@ -1,8 +1,10 @@
-DROP TABLE user_profile;
-DROP TABLE image_storage;
+DROP TABLE user_info CASCADE;
+DROP TABLE image_storage CASCADE;
 
-DROP TABLE message_storage;
-DROP TABLE dialog;
+DROP TABLE dialog CASCADE;
+DROP TABLE message_storage CASCADE;
 
-DROP TABLE list_of_contacts;
-DROP TABLE user_info;
+DROP TABLE user_profile CASCADE;
+DROP TABLE list_of_contacts CASCADE;
+
+DROP TABLE IF EXISTS tmp CASCADE;
