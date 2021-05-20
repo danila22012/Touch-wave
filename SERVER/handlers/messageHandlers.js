@@ -4,7 +4,7 @@ const {UserInfo, Dialog, MessageStorage} = require('../models/models')
 module.exports = (io, socket) => {
     const getMessages = async (roomId) => {
       const messages = await MessageStorage.findAll({where: {conversid: roomId}})
-      const implementedMessages = messages.map(m => ({usermessage: m.usermessage, userid: m.userid, id: m.id}))
+      const implementedMessages = messages.map(m => ({usermessage: m.usermessage, userid: m.userid, id: m.id, date: m.createdAt}))
       io.sockets.to(roomId).emit('messages', implementedMessages)
     }
   
