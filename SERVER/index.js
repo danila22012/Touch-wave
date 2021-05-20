@@ -35,28 +35,29 @@ app.use("/api", router)
 
 const onConnection = (socket) => {
     log('User connected')
-  
-    const { roomId } = socket.handshake.query
-    socket.roomId = roomId
-  
-    socket.join(roomId)
+    const rooms = []
+    socket.on('join', ({ user, room }) => {
+      socket.join(room);
+      rooms.push(room)
+    });
   
     registerMessageHandlers(io, socket)
-    // registerUserHandlers(io, socket)
   
     socket.on('disconnect', () => {
       log('User disconnected')
-      socket.leave(roomId)
+      rooms.forEach(room => {
+        socket.leave(room)
+      })
     })
   }
   
   
 const start = async () => {
     try {
-        io.on('connection', onConnection)
         await sequelize.authenticate()
         await sequelize.sync()
         server.listen(PORT, () => console.log(`server started on port ${PORT}`))
+        io.on('connection', onConnection)
     } catch (e) {
         console.log(e)
     }
