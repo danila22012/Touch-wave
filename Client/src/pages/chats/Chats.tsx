@@ -15,11 +15,12 @@ const Chats = (props: any) => {
       <PageTitle title={"Chats"} />
 
       {props.dialogs.map((el:any) => {
-        console.log(new Date(el.sentDate).getHours())
+        console.log(el);
+        
         return (
           //pass user id into query
           <NavLink
-          key={el.id}
+          key={el.dialogId}
             className={styles.chatItemContainer}
             activeClassName={styles.chatItemContainerSelected}
             to={`/chats/${el.dialogId}?contactId=${el.dialogId}`}
