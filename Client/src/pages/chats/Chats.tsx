@@ -1,21 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import UseHttpReques from "../../hooks/UseHttpReques.hook";
+
 import PageTitle from "../../components/PageTitle/PageTitle";
-import MochAva from "../../static/MochAva.svg";
+
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { getAllDialogs } from "../../actions";
 
+
+
 const Chats = (props: any) => {
   // importing api handler
+
 
   return (
     <div className={styles.chatsContainer}>
       <PageTitle title={"Chats"} />
 
       {props.dialogs.map((el:any) => {
-        console.log(el);
         
         return (
           //pass user id into query
@@ -23,7 +25,7 @@ const Chats = (props: any) => {
           key={el.dialogId}
             className={styles.chatItemContainer}
             activeClassName={styles.chatItemContainerSelected}
-            to={`/chats/${el.dialogId}?contactId=${el.dialogId}`}
+            to={`/chats/${el.dialogId}?contactId=${el.id}`}
           >
             <img
               className={styles.chatItemImg}

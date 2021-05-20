@@ -6,6 +6,7 @@ const Settings = () => {
   return (
     <div className={styles.settingsContainer}>
       <p className={styles.pageTitle}>Settings</p>
+      
     </div>
   );
 };
