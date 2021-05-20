@@ -140,7 +140,6 @@ class userController {
         try {
             const {id} = req.user
             const {id : contactId} = req.body
-
             let condition = [
                 { [Op.and]: [
                     { userowner: id },
@@ -167,6 +166,7 @@ class userController {
             const dialogId = dialogCandidate.id
             await MessageStorage.destroy({where: {conversid: dialogId}})
             await Dialog.destroy({where: {[Op.or]: condition}})
+            
              
             return res.json({message: 'Контакт удален'})
               
