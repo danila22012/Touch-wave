@@ -164,8 +164,9 @@ class userController {
               ];
             const dialogCandidate = await Dialog.findOne({where: {[Op.or]: condition}})
             const dialogId = dialogCandidate.id
-            await Dialog.destroy({where: {[Op.or]: condition}})
             await MessageStorage.destroy({where: {conversid: dialogId}})
+            await Dialog.destroy({where: {[Op.or]: condition}})
+            
              
             return res.json({message: 'Контакт удален'})
               

@@ -28,7 +28,7 @@ class authController {
                 return res.status(400).json({message: "Пользователь с таким телефоном уже существует"})
             }
             const hashPassword = bcrypt.hashSync(password, 7)
-            const user = await UserInfo.create({nameuser: username, secondname: secondname, phonenumber: phonenumber, userlogin: login, userpassword: hashPassword, image: ''})
+            const user = await UserInfo.create({nameuser: username, secondname: secondname, phonenumber: phonenumber, userlogin: login, userpassword: hashPassword, image: 'default.jpg'})
             // const imageStorage = await ImageStorage.create({id: user.id, pathtoimg: null})
 
             const token = generateAccessToken(user.id, user.phonenumber, user.login)
