@@ -230,14 +230,11 @@ class userController {
                     userid: user.id,
                 }, order: [['updatedAt', 'DESC']]})
                 
-                if (messageCandidates.length > 0 && messageCandidates[0]) {
+                if (messageCandidates[0]) {
                     newUsers[index].lastMessage = messageCandidates[0].usermessage
                     newUsers[index].sentDate = messageCandidates[0].createdAt
                 }
-               
-                
-               
-                
+
                 if (index === users.length - 1) {
                     console.log(newUsers)
                     res.json(newUsers)
