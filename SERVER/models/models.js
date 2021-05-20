@@ -72,27 +72,28 @@ MessageStorage.belongsTo(Dialog, {foreignKey: 'conversid', targetKey: 'id'})
 UserInfo.hasOne(MessageStorage)
 MessageStorage.belongsTo(UserInfo, {foreignKey: 'userid', targetKey: 'id'})
 
-sequelize.query(`CREATE OR REPLACE FUNCTION upload_data_in_csv() RETURNS TRIGGER 
-LANGUAGE PLPGSQL
-AS
-$$
-    BEGIN
-        CREATE TABLE tmp (
-            ConversId       INT,
-            UserId          INT,
-            UserMessage     VARCHAR(1000), 
-            DataOfSend      DATE,            
-            IsSeen          BOOLEAN
-        );
-        INSERT INTO tmp VALUES (NEW.ConversId, NEW.UserId, NEW.UserMessage, NEW.DataOfSend, NEW.IsSeen);
-            COPY tmp TO PROGRAM 'cat >> /home/test_storage.csv' DELIMITER ',';
-        DROP TABLE tmp;
-        RETURN NEW;
-    END;
-$$;`)
+// sequelize.query(`CREATE OR REPLACE FUNCTION upload_data_in_csv() RETURNS TRIGGER 
+// LANGUAGE PLPGSQL
+// AS
+// $$
+//     BEGIN
+//         CREATE TABLE tmp (
+//             ConversId       INT,
+//             UserId          INT,
+//             UserMessage     VARCHAR(1000), 
+//             DataOfSend      DATE,            
+//             IsSeen          BOOLEAN
+//         );
+//         INSERT INTO tmp VALUES (NEW.ConversId, NEW.UserId, NEW.UserMessage, NEW.DataOfSend, NEW.IsSeen);
+//             COPY tmp TO PROGRAM 'cat >> /home/test_storage.csv' DELIMITER ',';
+//         DROP TABLE tmp;
+//         RETURN NEW;
+//     END;
+// $$;`)
 
-sequelize.query(`CREATE TRIGGER auto_saving_new_message BEFORE INSERT ON message_storage
-FOR EACH ROW EXECUTE PROCEDURE upload_data_in_csv();`)
+// sequelize.query(`CREATE TRIGGER auto_saving_new_message BEFORE INSERT ON message_storage
+// FOR EACH ROW EXECUTE PROCEDURE upload_data_in_csv();`)
+sequelize.query(`DROP TRIGGER auto_saving_new_message ON message_storage;`)
 
 
 module.exports = {
