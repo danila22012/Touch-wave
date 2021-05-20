@@ -222,6 +222,7 @@ class userController {
                 
                 newUsers[index].nameuser = user.nameuser
                 newUsers[index].secondname = user.secondname
+                newUsers[index].id = user.id
                 newUsers[index].image = implementImage(user.image)
                 if (index === users.length - 1)
                 res.json(newUsers)
