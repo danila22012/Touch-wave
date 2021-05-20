@@ -1,9 +1,10 @@
+const { emit } = require('nodemon')
 const {UserInfo, Dialog, MessageStorage} = require('../models/models')
 
 module.exports = (io, socket) => {
     const getMessages = async (roomId) => {
       const messages = await MessageStorage.findAll({where: {conversid: roomId}})
-      const implementedMessages = messages.map(m => m.usermessage)
+      const implementedMessages = messages.map(m => ({usermessage: m.usermessage, userid: m.userid, id: m.id}))
       io.sockets.to(roomId).emit('messages', implementedMessages)
     }
   

@@ -38,8 +38,8 @@ POST http://localhost:5000/api/user/createMessage
 Content-Type: application/json
 
 {
-    "conversid": 3,
-    "userid": 6,
+    "conversid": 1,
+    "userid": 3,
     "usermessage": "Second",
     "dataofsend": null,
     "isseen": null
