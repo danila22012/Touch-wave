@@ -37,7 +37,7 @@ const onConnection = (socket) => {
     log('User connected')
     const rooms = []
     socket.on('join', ({ user, room }) => {
-      socket.join(room);
+      socket.join(room)
       rooms.push(room)
     });
   

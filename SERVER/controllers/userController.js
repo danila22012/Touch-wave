@@ -90,7 +90,7 @@ class userController {
             }
             const contact = await ListOfContacts.create({userowner: id, usercontact: candidate.id})
             const dialog = await createDialog(id, candidate.id)
-            return res.json({message: `${phonenumber} добавлен в контакты`, dialogId: dialog.id, image: implementImage(candidate.image), username: candidate.nameuser, secondname: candidate.secondname})
+            return res.json({dialogId: dialog.id, image: implementImage(candidate.image), username: candidate.nameuser, secondname: candidate.secondname, id: candidate.id})
         } catch(e) {
             console.log(e)
         }
