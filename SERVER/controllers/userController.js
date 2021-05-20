@@ -111,6 +111,10 @@ class userController {
             const newUsers = [];
             users.forEach(async (user, index) => {
                 newUsers.push({})
+                newUsers[index].nameuser = user.nameuser
+                newUsers[index].secondname = user.secondname
+                newUsers[index].id = user.id
+                newUsers[index].image = implementImage(user.image)
                 let condition = [
                 { [Op.and]: [
                     { userfirst: id },
@@ -123,10 +127,7 @@ class userController {
               ];
               const dialogCandidate = await Dialog.findOne({where: {[Op.or]: condition}})
               newUsers[index].dialogId = dialogCandidate.id
-              newUsers[index].nameuser = user.nameuser
-                newUsers[index].secondname = user.secondname
-                newUsers[index].id = user.id
-                newUsers[index].image = implementImage(user.image)
+              
                 if (index === users.length - 1)
                 res.json(newUsers)
 
@@ -196,6 +197,10 @@ class userController {
              const newUsers = [];
             users.forEach(async (user, index) => {
                 newUsers.push({})
+                newUsers[index].nameuser = user.nameuser
+                newUsers[index].secondname = user.secondname
+                newUsers[index].id = user.id
+                newUsers[index].image = implementImage(user.image)
                 let condition = [
                     { [Op.and]: [
                         { userfirst: id },
@@ -220,12 +225,13 @@ class userController {
                 }
                
                 
-                newUsers[index].nameuser = user.nameuser
-                newUsers[index].secondname = user.secondname
-                newUsers[index].id = user.id
-                newUsers[index].image = implementImage(user.image)
-                if (index === users.length - 1)
-                res.json(newUsers)
+               
+                
+                if (index === users.length - 1) {
+                    console.log(newUsers)
+                    res.json(newUsers)
+                }
+                
             })
             
         } catch(e) {
