@@ -1,9 +1,14 @@
 const UseLocalStorage = () => {
   const setToLocalStorage = (token: string) => {
-      console.log(token);
+    console.log(token);
     localStorage.setItem("token", token);
+
   };
-  return { setToLocalStorage };
+  
+  const deleteFromLocalStorage = (key:string) =>{
+    localStorage.removeItem(key);
+  }
+  return { setToLocalStorage,deleteFromLocalStorage };
 };
 
 export default UseLocalStorage;

@@ -8,6 +8,32 @@
   font-weight: 500;
   font-size: 2.5em;
 }
+.settingsHandler{
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.settingsImg{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.addUserModalInput {
+  max-width: 350px;
+  width: 100%;
+  border: none;
+  margin: 10px 0;
+  border-bottom: 2px solid #90a4ae;
+
+ padding: 10px 0;
+  font-size: 16px;
+  outline: none;
+}
 @media screen and (max-width: 420px) {
   .settingsContainer{
       padding: 15px 16px 0 16px;

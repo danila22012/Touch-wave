@@ -14,9 +14,12 @@ import Auth from "../../pages/auth/Auth";
 
 function App() {
   const [token, setToken] = useState(false);
-
+  
   useEffect(() => {
-    if(localStorage.getItem('token'))setToken(true)
+    if (localStorage.getItem("token")) {
+      
+      setToken(true);
+    }
   });
   if (!token) {
     return <Auth setToken={setToken} />;
@@ -26,7 +29,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <main className={styles.container}>
-          <Navigation />
+          <Navigation setToken={setToken}/>
           <div className={styles.routerDesktop}>
             <Switch>
               <Route path="/chats/">

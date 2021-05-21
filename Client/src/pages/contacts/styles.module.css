@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   margin: 10px 0;
+  position: relative;
 }
 .contactsListItemImg {
   margin-right: 20px;
@@ -47,7 +48,6 @@
   border-radius: 10px;
   outline: none;
   padding: 20px;
-  
 }
 .addUserModalOverlay {
   position: fixed;
@@ -56,7 +56,6 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.3);
-  
 }
 .addUserModalHeader {
   display: flex;
@@ -64,14 +63,41 @@
   justify-content: space-between;
   color: #d20980;
   font-size: 2em;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+    "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: 500;
- 
+
   padding-bottom: 10px;
   margin-bottom: 15px;
   border-bottom: 1px solid #dcebf2;
+}
+.addUserModalForm {
+  max-width: 350px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.addUserModalInput {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #90a4ae;
+
+ padding: 10px 0;
+  font-size: 16px;
+  outline: none;
+}
+.addUserModalSubmit{
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+.addUserModalSubmit img{
+  cursor: pointer;
+}
+.addUserModalInput:focus{
+  border-bottom: 2px solid #D20980;
 }
 @media screen and (max-width: 420px) {
   .contactsContainer {

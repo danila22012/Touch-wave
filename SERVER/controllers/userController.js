@@ -47,7 +47,7 @@ class userController {
             const {id} = req.user
             const user = await UserInfo.findOne({where: {id}})
             const {nameuser, secondname, image} = user
-            return res.json({nameuser, secondname, phonenumber, image: implementImage(image)});
+            return res.json({nameuser, secondname, image: implementImage(image)});
         } catch (e) {
             console.log(e)
         }

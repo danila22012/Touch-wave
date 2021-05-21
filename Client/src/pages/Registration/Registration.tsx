@@ -10,23 +10,12 @@ import Logo from "../../static/Logo.svg";
 import ShowPass from "../../static/ShowPass.svg";
 import styles from "./styles.module.css";
 
+
 type LoginProps = {
   setIsLogin: any;
   setToken:any,
 };
-const SignupSchema = Yup.object().shape({
-  number: Yup.number()
-    .typeError("That doesn't look like a phone number")
-    .positive("A phone number can't start with a minus")
-    .integer("A phone number can't include a decimal point")
-    .min(10, "phone must have 10 numbers")
-    .required("A phone number is required"),
-  login: Yup.string().required("Required"),
-  password: Yup.string()
-    .min(2, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-});
+
 
 const Registration = ({ setIsLogin ,setToken}: LoginProps) => {
   const [isPassShown, setIsPassShown] = useState("password");
@@ -52,10 +41,11 @@ const Registration = ({ setIsLogin ,setToken}: LoginProps) => {
             login: "",
             password: "",
           }}
-          // validationSchema={SignupSchema}
+        
           onSubmit={(values) => {
             signUp(values).then(({data})=>{
               setToLocalStorage(data.token)
+              document.location.reload();
               setToken(true)
             });
           }}

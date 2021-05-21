@@ -38,7 +38,9 @@ const Login = ({ setIsLogin, setToken }: LoginProps) => {
             console.log(
               signIn(values).then(({ data }) => {
                 setToLocalStorage(data.token);
+                document.location.reload();
                 setToken(true)
+               
               })
             );
           }}

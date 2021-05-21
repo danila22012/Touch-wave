@@ -1,15 +1,43 @@
-.ChatItemContainer{
+.ChatItemContainer {
     width: 100%;
+    position: relative;
 }
-.ChatItemEmpty{
+.ChatItemEmpty {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
 }
-.ChatItemEmptyTitle{
-    background-color:  #DCEBF2;
+.ChatItemEmptyTitle {
+    background-color: #dcebf2;
     display: block;
     padding: 5px;
     border-radius: 10px;
+}
+.messageFormContainer {
+    overflow-y: scroll;
+    height: calc(100vh - 200px);
+}
+
+.messageFormContainer::-webkit-scrollbar-thumb {
+    background: #DCEBF2 ;
+    border-radius: 5px;
+}
+.messageFormContainer::-webkit-scrollbar {
+    width: 10px;
+}
+
+.messageInput {
+    bottom: 35px;
+    margin: 0 40px;
+    width: 100%;
+    max-width: 800px;
+    background: #dcebf2;
+    border-radius: 28px;
+    border: none;
+    outline: none;
+    display: block;
+
+    padding: 25px;
+    font-size: 1.2em;
 }

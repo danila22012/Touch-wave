@@ -1,0 +1,40 @@
+.floatLeft {
+    justify-content: flex-start;
+    display: flex;
+}
+.floatRight {
+    justify-content: flex-end;
+    display: flex;
+}
+.floatRightData {
+    max-width: 400px;
+    padding: 30px;
+    position: relative;
+    margin: 10px 45px 10px 45px;
+    border-radius: 33px 33px 5px 33px;
+    background: #6e48ed;
+    color: #fff;
+}
+.floatLeftData {
+    position: relative;
+    background: #dcebf2;
+    color: #000;
+    max-width: 400px;
+    padding: 30px;
+    margin: 10px 45px 10px 45px;
+    border-radius: 33px 33px 33px 5px;
+}
+.messageDateRight {
+    position: absolute;
+    right: 10px;
+    bottom: 3px;
+    color: #dcebf2;
+    font-size: 1em;
+}
+.messageDateLeft {
+    position: absolute;
+    right: 25px;
+    bottom: 3px;
+    color: #546e7a;
+    font-size: 1em;
+}
