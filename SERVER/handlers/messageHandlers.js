@@ -1,5 +1,6 @@
-const { emit } = require('nodemon')
-const {UserInfo, Dialog, MessageStorage} = require('../models/models')
+const {MessageStorage} = require('../models/models')
+const jwt = require('jsonwebtoken')
+const {secret} = require('../config')
 
 module.exports = (io, socket) => {
     const getMessages = async (roomId) => {
@@ -8,13 +9,13 @@ module.exports = (io, socket) => {
       io.sockets.to(roomId).emit('messages', implementedMessages)
     }
   
-    const addMessage = async (conversid, userid, message) => {
-    await MessageStorage.create({conversid, userid, usermessage: message}, {where: {conversid}})
+    const addMessage = async (conversid, token, message) => {
+      const { id } = jwt.verify(token, secret)
+      await MessageStorage.create({conversid, userid: id, usermessage: message}, {where: {conversid}})
       getMessages()
     }
   
     const removeMessage = async (messageId) => {
-    //   db.get('messages').remove({ messageId }).write()
       const candidate = await MessageStorage.destroy({where: {id: messageId}})
       getMessages()
     }
