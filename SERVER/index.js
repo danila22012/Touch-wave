@@ -22,7 +22,6 @@ const io = socketio(server, {
 })
 
 const registerMessageHandlers = require('./handlers/messageHandlers')
-const registerUserHandlers = require('./handlers/userHandlers')
 
 
 

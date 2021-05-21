@@ -3,7 +3,6 @@ const router = new Router()
 const controller = require('../controllers/authController')
 const {check} = require("express-validator")
 const authMiddleware = require('../middlewaree/authMiddleware')
-// const roleMiddleware = require('./middlewaree/roleMiddleware')
 
 router.post('/registration', [
     check('username', "Имя пользователя не может быть пустым").notEmpty(),
@@ -11,7 +10,5 @@ router.post('/registration', [
     check('password', "Пароль должен быть больше 4 и меньше 10 символов").isLength({min:4, max:10})
 ], controller.registration)
 router.post('/login', controller.login)
-// router.get('/users', roleMiddleware(["ADMIN"]), controller.getUsers)
-// router.get('/users', authMiddleware(["ADMIN"]), controller.getUsers)
 
 module.exports = router
