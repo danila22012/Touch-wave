@@ -1,6 +1,5 @@
 const {MessageStorage} = require('../models/models')
 const jwt = require('jsonwebtoken')
-const {secret} = require('../config')
 
 module.exports = (io, socket) => {
     const getMessages = async (roomId) => {
@@ -10,7 +9,7 @@ module.exports = (io, socket) => {
     }
   
     const addMessage = async (conversid, token, message) => {
-      const { id } = jwt.verify(token, secret)
+      const { id } = jwt.verify(token, process.env.secret)
       await MessageStorage.create({conversid, userid: id, usermessage: message}, {where: {conversid}})
       getMessages()
     }
