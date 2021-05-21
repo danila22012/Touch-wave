@@ -10,7 +10,7 @@ module.exports = (io, socket) => {
   
     const addMessage = async (conversid, token, message) => {
       const { id } = jwt.verify(token, process.env.secret)
-      await MessageStorage.create({conversid, userid: id, usermessage: message}, {where: {conversid}})
+      await MessageStorage.create({conversid, userid: id, usermessage: message})
       getMessages()
     }
   
