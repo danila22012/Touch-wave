@@ -135,12 +135,14 @@ class userController {
                     { userfirst: userIds },
                     { usersecond: user.id }
                   ] }
-              ];
+              ]
               const dialogCandidate = await Dialog.findOne({where: {[Op.or]: condition}})
               newUsers[index].dialogId = dialogCandidate.id
-              
+              setTimeout(() => {
                 if (index === users.length - 1)
                 res.json(newUsers)
+              }, 100)
+               
 
             })
         } catch(e) {
@@ -235,10 +237,13 @@ class userController {
                     newUsers[index].sentDate = messageCandidates[0].createdAt
                 }
 
-                if (index === users.length - 1) {
-                    console.log(newUsers)
-                    res.json(newUsers)
-                }
+                setTimeout(() => {
+                    if (index === users.length - 1) {
+                        console.log(newUsers)
+                        res.json(newUsers)
+                    }
+                }, 100)
+                
                 
             })
             

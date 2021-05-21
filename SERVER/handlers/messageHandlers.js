@@ -11,12 +11,12 @@ module.exports = (io, socket) => {
     const addMessage = async (conversid, token, message) => {
       const { id } = jwt.verify(token, process.env.secret)
       await MessageStorage.create({conversid, userid: id, usermessage: message})
-      getMessages()
+      getMessages(conversid)
     }
   
-    const removeMessage = async (messageId) => {
+    const removeMessage = async (conversid, messageId) => {
       const candidate = await MessageStorage.destroy({where: {id: messageId}})
-      getMessages()
+      getMessages(conversid)
     }
   
     socket.on('message:get', getMessages)
