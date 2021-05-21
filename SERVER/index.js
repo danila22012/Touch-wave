@@ -10,7 +10,6 @@ const socketio = require('socket.io')
 
 const log = console.log
 
-
 const PORT = process.env.PORT || 5000
 
 const app = express()
@@ -22,8 +21,6 @@ const io = socketio(server, {
 })
 
 const registerMessageHandlers = require('./handlers/messageHandlers')
-
-
 
 app.use(cors())
 app.use(express.json())

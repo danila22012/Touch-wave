@@ -3,9 +3,6 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator')
 const {UserInfo} = require('../models/models')
 
-
-
-
 const generateAccessToken = (id, phonenumber, login) => {
     const payload = {
         id, phonenumber, login
